@@ -74,6 +74,7 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="./cycle.js"></script>
     <script>
         (function(){
             //get element
@@ -83,10 +84,21 @@
             const userList = document.getElementById('user-list');
             const loginCol = document.getElementById('login-col');
             const chatCol = document.getElementById('chat-col');
+
+            let socket;
+            if(localStorage.getItem('socket')) {
+                socket = JSON.parse(localStorage.getItem('socket'));
+                // 创建一个不自动连接的 socket 对象
+                let temp = io({autoConnect: false});
+                Object.setPrototypeOf(socket, Object.getPrototypeOf(temp));
+                delete temp;
+            } else {
+                socket = io('http://localhost:5000', {'timeout':5000, 'connect timeout':5000});
+                localStorage.setItem('socket', JSON.stringify(JSON.decycle(socket)));
+            }
+            
         
-            // connect to socket.io
-            var socket = io({'timeout':5000, 'connect timeout':5000});
-            //check for connections
+            
 
             if(socket !== undefined){
                 console.log('connected to socket');

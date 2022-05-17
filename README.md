@@ -1,6 +1,5 @@
 # ChattingRoom
-
-A simple and easy online chatting room built by JavaScript,Socket.io, MaterializeCss and ExpressJS,
+A simple and easy online chatting room built by JavaScript, Socket.io, MaterializeCss and ExpressJS,
 
 
 ## Getting Started
